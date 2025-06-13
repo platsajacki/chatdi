@@ -3,13 +3,10 @@ dev-install:
 	pip install -r requirements-dev.txt
 
 fmt:
-	ruff format src
+	ruff format src --check || true && ruff format src
 
 lint:
-	ruff check src
-
-lint-fix:
-	ruff check src --fix
+	ruff check src --show-fixes
 
 tag:
 	make lint

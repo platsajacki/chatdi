@@ -14,7 +14,6 @@ Repository = "https://github.com/platsajacki/chatdi"
 line-length = 120
 target-version = "py313"
 fix = true
-select = ["E", "F", "B", "N", "I", "UP", "SIM"]
 exclude = ["migrations", "venv", ".mypy_cache", "__pycache__"]
 
 [tool.ruff.format]
@@ -22,6 +21,9 @@ quote-style = "single"
 indent-style = "tab"
 docstring-code-format = true
 docstring-code-line-length = 60
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "N", "I", "UP", "SIM"]
 
 [tool.ruff.lint.isort]
 section-order = [
