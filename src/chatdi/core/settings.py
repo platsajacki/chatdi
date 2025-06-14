@@ -35,7 +35,9 @@ DJANGO_APPS = [
 	'django.contrib.staticfiles',
 ]
 THIRD_PARTY_APPS = []
-LOCAL_APPS = []
+LOCAL_APPS = [
+	'apps.users',
+]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ======================================================
 # Пользователи
 # ======================================================
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
 	{
