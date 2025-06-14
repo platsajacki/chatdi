@@ -18,9 +18,9 @@ def get_log_formatter(debug: bool) -> str:
 	return '[%(asctime)s] %(levelname)s in %(name)s.%(funcName)s:\n%(message)s\n'
 
 
-def get_logging_config(debug: bool, log_dir: str | Path) -> dict[str, Any]:
+def get_logging_config(debug: bool, log_dir: Path) -> dict[str, Any]:
 	log_formatter = get_log_formatter(debug)
-	logging = {
+	logging: dict[str, Any] = {
 		'version': 1,
 		'disable_existing_loggers': False,
 		'formatters': {

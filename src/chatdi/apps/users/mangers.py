@@ -9,16 +9,16 @@ if TYPE_CHECKING:
 
 
 class UserManager(DjangoUserManager):
-	def create_user(self, email: str, password: str | None = None, **extra_fields: Any) -> User:
+	def create_user(self, email: str, password: str | None = None, **extra_fields: Any) -> User:  # type: ignore[override]
 		if not email:
 			raise ValueError('Email is required')
 		email = self.normalize_email(email)
 		user = self.model(email=email, **extra_fields)
 		user.set_password(password)
 		user.save(using=self._db)
-		return user
+		return user  # type: ignore[return-value]
 
-	def create_superuser(self, email: str, password: str | None = None, **extra_fields: Any) -> User:
+	def create_superuser(self, email: str, password: str | None = None, **extra_fields: Any) -> User:  # type: ignore[override]
 		extra_fields.setdefault('is_staff', True)
 		extra_fields.setdefault('is_superuser', True)
 		return self.create_user(email, password, **extra_fields)

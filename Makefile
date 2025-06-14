@@ -8,6 +8,9 @@ fmt:
 lint:
 	ruff check src --show-fixes
 
+mypy:
+	PYTHONPATH=src DJANGO_SETTINGS_MODULE=chatdi.core.settings mypy src
+
 ruff:
 	make fmt
 	make lint

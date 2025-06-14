@@ -44,6 +44,7 @@ section-order = [
 # Static typing: mypy
 # ----------------------------
 [tool.mypy]
+mypy_path = "src/chatdi"
 python_version = "3.13"
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -51,7 +52,13 @@ disallow_incomplete_defs = true
 check_untyped_defs = true
 strict_optional = true
 no_implicit_optional = true
-exclude = "(venv|migrations|tests)"
+ignore_missing_imports = true
+plugins = ["mypy_django_plugin.main"]
+exclude = "(venv|migrations|_tests)"
+
+[tool.django-stubs]
+django_settings_module = "core.settings"
+strict_settings = true
 
 # ----------------------------
 # Testing: Pytest

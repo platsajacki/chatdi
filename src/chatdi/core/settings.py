@@ -34,7 +34,7 @@ DJANGO_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 ]
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = []  # type: ignore[var-annotated]
 LOCAL_APPS = [
 	'apps.users',
 ]
@@ -188,4 +188,4 @@ LOG_DIR = BASE_DIR / 'logs'
 if not path.exists(LOG_DIR):
 	makedirs(LOG_DIR)
 
-LOGGING = get_logging_config(log_dir=LOG_DIR, debug=DEBUG)
+LOGGING = get_logging_config(log_dir=LOG_DIR, debug=bool(DEBUG))
