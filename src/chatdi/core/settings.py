@@ -10,10 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = getenv('SECRET_KEY', 'secret')
 DEBUG = int(getenv('DEBUG', 0))
-ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1 localhost').split(' ')
+ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1, localhost').split(', ')
 SITE_DOMAIN = getenv('SITE_DOMAIN', '')
 SITE_BASE_URL = f'https://{SITE_DOMAIN}/'
-
+PROXY_COUNT = int(p) if (p := getenv('PROXY_COUNT')) else None
 
 # ======================================================
 # CORS and CSRF configuration
@@ -21,7 +21,7 @@ SITE_BASE_URL = f'https://{SITE_DOMAIN}/'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
-CSRF_TRUSTED_ORIGINS = getenv('CSRF_TRUSTED_ORIGINS', 'http://127.0.0.1:8000 http://localhost:8000').split(' ')
+CSRF_TRUSTED_ORIGINS = getenv('CSRF_TRUSTED_ORIGINS', 'http://127.0.0.1:8000, http://localhost:8000').split(', ')
 
 # ======================================================
 # Installed apps and middleware
@@ -39,6 +39,7 @@ LOCAL_APPS = []
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+	'core.middlewares.real_ip.RealIPMiddleware',
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
@@ -62,7 +63,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql',
-		'NAME': getenv('POSTGRES_DB', str(BASE_DIR / 'db.sqlite3')),
+		'NAME': getenv('POSTGRES_DB', 'chatdi'),
 		'USER': getenv('POSTGRES_USER', 'user'),
 		'PASSWORD': getenv('POSTGRES_PASSWORD', 'password'),
 		'HOST': getenv('SQL_HOST', 'localhost'),

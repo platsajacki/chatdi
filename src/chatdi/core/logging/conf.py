@@ -7,7 +7,7 @@ DATETIME_FORMATTER = '%d/%b/%Y %H:%M:%S'
 def get_log_formatter(debug: bool) -> str:
 	if debug:
 		return (
-			'\n========== START ==========\n'
+			'========== START ==========\n'
 			'Time:    %(asctime)s\n'
 			'Level:   %(levelname)s\n'
 			'Logger:  %(name)s\n'
@@ -77,7 +77,7 @@ def get_logging_config(debug: bool, log_dir: str | Path) -> dict[str, Any]:
 		'loggers': {
 			'django': {
 				'handlers': ['console'],
-				'level': 'ERROR',
+				'level': 'DEBUG',
 				'propagate': False,
 			},
 			'celery': {
@@ -105,7 +105,9 @@ def get_logging_config(debug: bool, log_dir: str | Path) -> dict[str, Any]:
 	}
 	if not debug:
 		logging['loggers']['django']['handlers'] = ['console', 'timed_rotating_file']
+		logging['loggers']['django']['level'] = 'ERROR'
 		logging['loggers']['celery']['handlers'] = ['console', 'celery_file']
 		logging['loggers']['main']['handlers'] = ['console', 'timed_rotating_file']
 		logging['loggers']['telegram']['handlers'] = ['console', 'telegram']
 		logging['loggers'].pop('db_logger', None)
+	return logging
