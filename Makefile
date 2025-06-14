@@ -8,6 +8,10 @@ fmt:
 lint:
 	ruff check src --show-fixes
 
+ruff:
+	make fmt
+	make lint
+
 tag:
 	make lint
 	make test
