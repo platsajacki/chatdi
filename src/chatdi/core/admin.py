@@ -19,4 +19,4 @@ class ChatDiAdminSite(AdminSite):
 		return _model_admin_wrapper
 
 
-admin = ChatDiAdminSite(name='chatdi_admin')
+admin_site = ChatDiAdminSite(name='chatdi_admin')

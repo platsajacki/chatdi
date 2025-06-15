@@ -3,14 +3,14 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
-from core.admin import admin
+from core.admin import admin_site
 
 from apps.users.models import User
 
-admin.register(Group, GroupAdmin)
+admin_site.register(Group, GroupAdmin)
 
 
-@admin.register_model(User)
+@admin_site.register_model(User)
 class UserAdmin(DjangoUserAdmin):
 	fieldsets = (
 		(
