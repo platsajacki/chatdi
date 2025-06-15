@@ -14,6 +14,15 @@ admin.register(Group, GroupAdmin)
 class UserAdmin(DjangoUserAdmin):
 	fieldsets = (
 		(
+			_('Identification'),
+			{
+				'fields': (
+					'id',
+					'uuid',
+				)
+			},
+		),
+		(
 			_('Authentication'),
 			{
 				'fields': (
@@ -94,6 +103,7 @@ class UserAdmin(DjangoUserAdmin):
 	)
 	readonly_fields = (
 		'id',
+		'uuid',
 		'last_login',
 		'date_joined',
 		'confirmation_sent_at',

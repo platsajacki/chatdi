@@ -3,10 +3,12 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from core.abstract_models import UUIDModel
+
 from apps.users.mangers import UserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
 	email = models.EmailField(
 		_('Email address'),
 		blank=True,
