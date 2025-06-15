@@ -11,9 +11,10 @@ lint:
 mypy:
 	PYTHONPATH=src DJANGO_SETTINGS_MODULE=chatdi.core.settings mypy src
 
-ruff:
+check:
 	make fmt
 	make lint
+	make mypy
 
 tag:
 	make lint

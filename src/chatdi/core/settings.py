@@ -1,3 +1,4 @@
+from datetime import timedelta
 from os import getenv, makedirs, path
 from pathlib import Path
 
@@ -34,8 +35,13 @@ DJANGO_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 ]
-THIRD_PARTY_APPS = []  # type: ignore[var-annotated]
+THIRD_PARTY_APPS = [
+	'drf_spectacular',
+	'rest_framework',
+	'rest_framework_simplejwt',
+]
 LOCAL_APPS = [
+	'apps.a12n',
 	'apps.users',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -79,9 +85,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ======================================================
 # Users
 # ======================================================
-# ======================================================
-# Пользователи
-# ======================================================
 AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -101,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # ======================================================
-# Локализация и часовой пояс
+# Localization
 # ======================================================
 LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'UTC'
@@ -110,17 +113,27 @@ USE_TZ = True
 
 
 # ======================================================
-# REST API и Swagger
+# REST API
 # ======================================================
 REST_FRAMEWORK = {
-	'DEFAULT_PERMISSION_CLASSES': [
-		'core.api.permissions.HasExternalServiceAPIKey',
-	]
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework_simplejwt.authentication.JWTAuthentication',
+		'rest_framework.authentication.SessionAuthentication',
+	),
+	'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
-SWAGGER_SETTINGS = {'SECURITY_DEFINITIONS': {'Api-Key': {'type': 'apiKey', 'name': 'Authorization', 'in': 'header'}}}
-SWAGGER_USE_COMPAT_RENDERERS = False
+SIMPLE_JWT = {
+	'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+	'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+	'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
+SPECTACULAR_SETTINGS = {
+	'TITLE': 'ChatDi API',
+	'DESCRIPTION': 'Project API documentation',
+	'VERSION': '1.0.0',
+}
 
 # ======================================================
 # Setatic files (HTML, CSS, JavaScript, Images)

@@ -1,7 +1,11 @@
+from logging import getLogger
 from pathlib import Path
 from typing import Any
 
 DATETIME_FORMATTER = '%d/%b/%Y %H:%M:%S'
+
+main_logger = getLogger('main')
+tg_logger = getLogger('telegram')
 
 
 def get_log_formatter(debug: bool) -> str:
