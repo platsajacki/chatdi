@@ -38,7 +38,15 @@ section-order = [
 
 [tool.ruff.lint.isort.sections]
 "testing" = ["pytest", "pytest_lazy_fixtures", "pytest_mock"]
-"django" = ["django", "django_query_profiler", "drf_spectacular", "phonenumber_field", "rest_framework", "rest_framework_api_key"]
+"django" = [
+  "django",
+  "django_query_profiler",
+  "drf_spectacular",
+  "phonenumber_field",
+  "rest_framework",
+  "rest_framework_api_key",
+  "rest_framework_simplejwt",
+]
 
 # ----------------------------
 # Static typing: mypy

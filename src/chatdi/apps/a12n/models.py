@@ -3,10 +3,11 @@ from django.utils.translation import gettext_lazy as _
 
 from core.abstract_models import TimestampedModel
 
+from apps.a12n.enums import AuthEventType
 from apps.users.models import User
 
 
-class SingIn(TimestampedModel):
+class AuthLog(TimestampedModel):
 	user = models.ForeignKey(
 		User,
 		on_delete=models.PROTECT,
@@ -18,11 +19,24 @@ class SingIn(TimestampedModel):
 		null=True,
 		blank=True,
 	)
+	user_agent = models.TextField(
+		verbose_name=_('User Agent'),
+		null=True,
+		blank=True,
+		help_text=_('Browser or client device information at sign in.'),
+	)
+	event_type = models.CharField(
+		max_length=20,
+		choices=AuthEventType.choices,
+		default=AuthEventType.SIGN_IN,
+		verbose_name=_('Event Type'),
+		help_text=_('Type of authentication event.'),
+	)
 
 	class Meta:
-		verbose_name = _('Sign In')
-		verbose_name_plural = _('Sign Ins')
+		verbose_name = _('Auth Log')
+		verbose_name_plural = _('Auth Logs')
 		ordering = ('-created_at',)
 
 	def __str__(self) -> str:
-		return f'Sign In: {self.user_id} at {self.created_at}'
+		return f'Auth Log ({self.get_event_type_display()}): {self.user_id} at {self.created_at}'

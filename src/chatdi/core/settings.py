@@ -130,6 +130,8 @@ SIMPLE_JWT = {
 	'ACCESS_TOKEN_LIFETIME': ACCESS_TOKEN_LIFETIME,
 	'REFRESH_TOKEN_LIFETIME': REFRESH_TOKEN_LIFETIME,
 	'AUTH_HEADER_TYPES': ('Bearer',),
+	'TOKEN_OBTAIN_SERIALIZER': 'apps.a12n.api.v1.serializers.jwt.TokenObtainPairSerializer',
+	'TOKEN_REFRESH_SERIALIZER': 'apps.a12n.api.v1.serializers.jwt.TokenRefreshSerializer',
 }
 
 SPECTACULAR_SETTINGS = {

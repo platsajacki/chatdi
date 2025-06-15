@@ -5,11 +5,11 @@ from django.utils.translation import gettext_lazy as _
 
 from core.admin import admin_site
 
-from apps.a12n.models import SingIn
+from apps.a12n.models import AuthLog
 
 
-@admin_site.register_model(SingIn)
-class SingInAdmin(admin.ModelAdmin):
+@admin_site.register_model(AuthLog)
+class AuthLogAdmin(admin.ModelAdmin):
 	list_display = (
 		'id',
 		'user',
@@ -22,7 +22,9 @@ class SingInAdmin(admin.ModelAdmin):
 				'fields': (
 					'id',
 					'user',
+					'event_type',
 					'ip_address',
+					'user_agent',
 				)
 			},
 		),
@@ -39,6 +41,8 @@ class SingInAdmin(admin.ModelAdmin):
 	readonly_fields = (
 		'id',
 		'user',
+		'event_type',
+		'user_agent',
 		'ip_address',
 		'created_at',
 		'updated_at',
