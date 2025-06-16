@@ -1,5 +1,8 @@
+run-websockets:
+	python src/websockets/main.py
+
 dev-install:
-	pip install -r src/chatdi/requirements.txt
+	pip install -r src/requirements.txt
 	pip install -r requirements-dev.txt
 
 fmt:
@@ -25,22 +28,22 @@ tag:
 	git tag -a "$$tag_name" -m "$$tag_name" && git push origin "$$tag_name"
 
 superuser:
-	python src/chatdi/manage.py createsuperuser
+	python src/manage.py createsuperuser
 
 runserver:
-	python src/chatdi/manage.py runserver
+	python src/manage.py runserver
 
 static:
-	python src/chatdi/manage.py collectstatic
+	python src/manage.py collectstatic
 
 makemigrations:
-	python src/chatdi/manage.py makemigrations
+	python src/manage.py makemigrations
 
 migrate:
-	python src/chatdi/manage.py migrate
+	python src/manage.py migrate
 
 shell:
-	python src/chatdi/manage.py shell
+	python src/manage.py shell
 
 test:
-	pytest --cov=src/chatdi src/chatdi/tests --blockage --cov-report term-missing
+	pytest --cov=src/chatdi src/tests --blockage --cov-report term-missing
