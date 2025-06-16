@@ -3,9 +3,8 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
-from core.admin import admin_site
-
 from apps.users.models import User
+from core.admin import admin_site
 
 admin_site.register(Group, GroupAdmin)
 

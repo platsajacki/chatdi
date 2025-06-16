@@ -3,9 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from core.abstract_models import UUIDModel
-
 from apps.users.mangers import UserManager
+from core.abstract_models import UUIDModel
 
 
 class User(AbstractBaseUser, PermissionsMixin, UUIDModel):

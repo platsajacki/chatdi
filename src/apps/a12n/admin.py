@@ -3,9 +3,8 @@ from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
-from core.admin import admin_site
-
 from apps.a12n.models import AuthLog
+from core.admin import admin_site
 
 
 @admin_site.register_model(AuthLog)

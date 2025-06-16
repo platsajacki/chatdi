@@ -1,8 +1,9 @@
 from django.conf import settings
 from drf_spectacular.utils import extend_schema
 
-from core.spectacular.constants import SchemaTag
 from humanize import precisedelta
+
+from core.spectacular.constants import SchemaTag
 
 ACCESS_TOKEN_LIFETIME = precisedelta(settings.ACCESS_TOKEN_LIFETIME)
 REFRESH_TOKEN_LIFETIME = precisedelta(settings.REFRESH_TOKEN_LIFETIME)

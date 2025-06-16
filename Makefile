@@ -1,9 +1,10 @@
 run-websockets:
-	python src/websockets/main.py
+	PYTHONPATH=src uvicorn src.ws_fastapi.main:app --reload --host 0.0.0.0 --port 8001
 
 dev-install:
 	pip install -r src/requirements.txt
 	pip install -r requirements-dev.txt
+	pip install -r src/ws_fastapi/requirements.txt
 
 fmt:
 	ruff format src --check || true && ruff format src

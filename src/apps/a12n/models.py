@@ -1,10 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from core.abstract_models import TimestampedModel
-
 from apps.a12n.enums import AuthEventType
 from apps.users.models import User
+from core.abstract_models import TimestampedModel
 
 
 class AuthLog(TimestampedModel):

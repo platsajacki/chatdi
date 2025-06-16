@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from typing import Any
 
 
@@ -56,3 +56,22 @@ class BaseService(metaclass=ABCMeta):
 	@abstractmethod
 	def act(self) -> Any:
 		raise NotImplementedError('Please implement in the service class')
+
+
+class AsyncBaseService(metaclass=ABCMeta):
+	"""Async base service template."""
+
+	async def __call__(self) -> Any:
+		await self.validate()
+		return await self.act()
+
+	def get_validators(self) -> list[Callable[[], Awaitable[None]]]:
+		return []
+
+	async def validate(self) -> None:
+		for validator in self.get_validators():
+			await validator()
+
+	@abstractmethod
+	async def act(self) -> Any:
+		raise NotImplementedError('Please implement in the service class.')
